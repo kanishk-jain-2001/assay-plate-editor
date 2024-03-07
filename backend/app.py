@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify 
 from flask_cors import CORS
-import models 
+import models
 
 app = Flask(__name__)
 CORS(app)
@@ -32,17 +32,17 @@ def update_add_plate_info():
 
     # Logic for updating assay plate information
     if plate_id: 
-        plate = models.Plates.query.get(plate_id)
+        plate = models.db.select(models.Plates).filter_by(id=plate_id)
         if not plate: 
             return jsonify({"error": "Plate not found"}), 404
         if plate.type == "96":
-            plate96 = models.Plate96.query.filter_by(plate_id=plate_id).first()
+            plate96 = models.db.select(models.Plate96).filter_by(plate_id=plate_id).first()
             if plate96:
                 plate96.wells = data['wells']
             else:
                 return jsonify({"error": "Plate96 details not found"}), 404
         elif plate.type == "384":
-            plate384 = models.Plate384.query.filter_by(plate_id=plate_id).first()
+            plate384 = models.db.select(models.Plate384).filter_by(plate_id=plate_id).first()
             if plate384:
                 plate384.wells = data['wells']
             else: 
