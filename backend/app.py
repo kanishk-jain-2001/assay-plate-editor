@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify 
 import models 
 
 app = Flask(__name__)
@@ -12,40 +12,27 @@ with app.app_context():
 
 @app.route("/view-assay-plates")
 def view_plates():
-
-    """
-    Returns a list of all configured plates in the database 
-    """
-
-    return "<p>Hello, World!</p>"
+    """ Returns a list of all configured plates in the database """
+    
+    return jsonify("Test")
 
 @app.route("/delete-assay-plate")
 def delete_plate():
-
-    """
-    Deletes a specific plate from the database. 
-    """
+    """ Deletes a specific plate from the database """
 
     return "<p>Hello, World!</p>"
 
 @app.route("/create-assay-plate")
 def create_plate():
+    """ Creates an Assay Plate  """
 
-    """
-    Creates an Assay Plate 
-    """
-
-    return "<p>Hello, World!</p>"
+    return jsonify("Table has been made successfully")
 
 @app.route("/update-or-add-assay-plate-info")
 def update_add_plate_info():
-
-    """
-    Allows the user to update or add an assay plate of their choosing 
-    """
-
+    """ Allows the user to update or add an assay plate of their choosing """
+    
     return "<p>Hello, World!</p>"
-
 
 if __name__ == '__main__':
     app.run()

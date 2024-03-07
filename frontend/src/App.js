@@ -1,11 +1,11 @@
 import './App.css';
 
-function App() {
+export default function App () {
   return (
-    <div className="App">
-      Hello
-    </div>
-  );
-}
-
-export default App;
+    <>
+      <div className="App">
+        Hello
+      </div>
+    </>
+  )
+};
