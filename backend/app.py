@@ -9,13 +9,12 @@ app.config["SQLALCHEMY_DATABASE_URI"] =  "postgresql://postgres:password@127.0.0
 
 models.db.init_app(app)
 
-# with app.app_context():
-#     models.db.create_all()
+with app.app_context():
+    models.db.create_all()
 
 @app.route("/view-assay-plates", methods=['GET'])
 def view_plates():
     """ Returns a list of all configured plates in the database """
-
     # Fetch data from database
     plates_query = models.db.session.query(models.Plates).all()
 
@@ -28,11 +27,16 @@ def view_plates():
     # Return data as a JSON response
     return jsonify(plates_data)
 
-@app.route("/delete-assay-plate")
-def delete_plate():
+@app.route("/delete-assay-plate/<int:plate_id>", methods=['DELETE'])
+def delete_plate(plate_id):
     """ Deletes a specific plate from the database """
-
-    return jsonify("Table has been deleted successfully")
+    plate_to_delete = models.db.session.execute(models.db.select(models.Plates).filter_by(id=plate_id)).scalar_one()
+    if plate_to_delete:
+        models.db.session.delete(plate_to_delete)
+        models.db.session.commit()
+        return jsonify({'message': 'User deleted successfully'}), 200
+    else:
+        return jsonify({'message': 'User not found'}), 404
 
 @app.route("/update-or-add-assay-plate", methods=['POST'])
 def update_add_plate_info():
