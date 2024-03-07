@@ -10,6 +10,10 @@ In the models.py folder, you can see the three tables that are used in this.
 ### Delete Assay Plate Endpoint 
 This will allow the user to delete an endpoint 
 
+### Test cases using cURL 
+Here are a few test cases to run easily using cURL if you are running the backend locally: 
+-
+
 ### 
 
 ## Frontend 
