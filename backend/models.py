@@ -13,6 +13,7 @@ class Plates(Base):
     id: Mapped[int] = mapped_column(primary_key = True)
     type: Mapped[int] = mapped_column(nullable = False)
 
+
 # Table 2 Contains the detailed information for the 96 well plates, foreign key is connected to table 1 
 class Plate96(Base):
    __tablename__ = "96_well_plates"
