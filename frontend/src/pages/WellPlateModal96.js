@@ -67,6 +67,7 @@ export default function WellPlateModal96(props) {
                   <Button className= "me-2" onClick={() => {
                     props.onSave(wellsData); 
                     props.onHide();
+                    handleWellDataClear();
                   }}>
                     Save
                   </Button>

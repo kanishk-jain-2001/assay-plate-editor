@@ -15,8 +15,9 @@ export default function App () {
   const [savedPlates96, setSavedPlates96] = useState([]);
 
   const handleSave96 = (data) => {
-    setSavedPlates96([...savedPlates96, data]);
+    setSavedPlates96([data]);
     // Handle saved data (e.g., send to backend or store in state)
+    console.log(savedPlates96)
   };
 
   return (
