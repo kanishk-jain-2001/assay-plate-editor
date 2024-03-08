@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import WellPlateModal96 from './WellPlateModal96';
 import WellPlateModal384 from './WellPlateModal384';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'; 
+
 
 
 export default function App () {

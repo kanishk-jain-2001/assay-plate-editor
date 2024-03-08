@@ -1,0 +1,23 @@
+.plate {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr); /* Creates a 12-column grid */
+  grid-gap: 10px; /* Adjusts space between wells */
+}
+
+.well {
+  width: 100%; /* Adjust the width as necessary */
+  height: 60px; /* Adjust the height as necessary */
+  border: 1px solid #ccc; /* Border for visual separation */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer; /* Indicates that the well is clickable */
+  background-color: #f8f8f8; /* Light background color */
+}
+
+/* Additional styling for displaying well data */
+.well > div {
+  text-align: center;
+}
+
+  
