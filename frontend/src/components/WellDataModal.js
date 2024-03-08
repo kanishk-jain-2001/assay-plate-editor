@@ -3,11 +3,15 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 const WellDataModal = ({ show, onHide, onSave, initialData }) => {
-  const [data, setData] = useState(initialData || { reagent: '', antibody: '', concentration: '' });
+  const [data, setData] = useState(initialData || { reagent: null, antibody: null, concentration: null });
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
+
+  const isInputValid = () => {
+    return data.reagent || data.antibody || data.concentration;
+  };  
 
   return (
     <Modal show={show} onHide={onHide}>
@@ -55,7 +59,7 @@ const WellDataModal = ({ show, onHide, onSave, initialData }) => {
         </form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => onSave(data)}>Save</Button>
+        <Button onClick={() => isInputValid() && onSave(data)}>Save</Button>
         <Button onClick={onHide}>Cancel</Button>
       </Modal.Footer>
     </Modal>

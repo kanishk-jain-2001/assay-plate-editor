@@ -57,14 +57,17 @@ export default function WellPlateModal96(props) {
               {renderWells()}
             </div>
           </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={() => {
-              props.onSave(wellsData); 
-              props.onHide();
-            }}>
-              Save
-            </Button>
-            <Button onClick={props.onHide}>Close</Button>
+          <Modal.Footer className="d-flex justify-content-between">
+              <Button variant="danger">Clear</Button>
+              <div>
+                  <Button className="me-2" onClick={() => {
+                    props.onSave(wellsData); 
+                    props.onHide();
+                  }}>
+                    Save
+                  </Button>
+                  <Button onClick={props.onHide}>Close</Button>
+              </div>
           </Modal.Footer>
         </Modal>
         <WellDataModal

@@ -16,7 +16,7 @@ export default function WellPlateModal384(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        
+        Coming Soon
         </Modal.Body>
         <Modal.Footer>
           <Button>Save</Button>
