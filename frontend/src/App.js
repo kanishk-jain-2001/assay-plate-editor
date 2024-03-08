@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import WellPlateModal96 from './pages/WellPlateModal96';
@@ -12,12 +13,19 @@ export default function App () {
 
   const [modalShow96, setModalShow96] = useState(false);
   const [modalShow384, setModalShow384] = useState(false);
-  const [savedPlates96, setSavedPlates96] = useState([]);
 
   const handleSave96 = (data) => {
-    setSavedPlates96([data]);
-    // Handle saved data (e.g., send to backend or store in state)
-    console.log(savedPlates96)
+    // Send data to backend
+    axios.post('http://127.0.0.1:5000/update-or-add-assay-plate', {
+      type: "96",
+      wells: data
+    })
+    .then(response => {
+      console.log('Data successfully sent to the backend', response);
+    })
+    .catch(error => {
+      console.error('Error sending data to the backend', error);
+    });
   };
 
   return (
