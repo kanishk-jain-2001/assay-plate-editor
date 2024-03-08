@@ -34,7 +34,6 @@ export default function WellPlateModal96(props) {
 
     const handleWellDataDelete = async (plateId) => {
         try {
-          console.log(`http://127.0.0.1:5000/delete-assay-plate/${plateId}`)
           const response = await axios.delete(`http://127.0.0.1:5000/delete-assay-plate/${plateId}`);
           console.log('Response:', response.data);
         } catch (error) {
@@ -57,6 +56,20 @@ export default function WellPlateModal96(props) {
         }
       }
       return wells;
+    };
+
+    const onSave = async (wellData, plateID) => {
+      console.log(wellData)
+      axios.post('http://127.0.0.1:5000/update-or-add-assay-plate', {
+        id: plateID,
+        wells: wellData
+      })
+      .then(response => {
+        console.log('Data successfully sent to the backend', response);
+      })
+      .catch(error => {
+        console.error('Error sending data to the backend', error);
+      });
     };
 
     return (
@@ -82,7 +95,7 @@ export default function WellPlateModal96(props) {
              <Button variant="danger" onClick={() => handleWellDataDelete(props.plateinformation.id)}>Delete</Button>
               <div>
                   <Button className= "me-2" onClick={() => {
-                    props.onSave(wellsData); 
+                    onSave(wellsData, props.plateinformation.id ); 
                     props.onHide();
                     handleWellDataClear();
                   }}>

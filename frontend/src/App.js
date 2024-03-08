@@ -42,7 +42,7 @@ export default function App () {
 
   const handleSave96 = (data) => {
     axios.post('http://127.0.0.1:5000/update-or-add-assay-plate', {
-      type: "96",
+      type: 96,
       wells: data
     })
     .then(response => {

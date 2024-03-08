@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify 
 from flask_cors import CORS
+from sqlalchemy import select
 import models
 
 app = Flask(__name__)
@@ -61,28 +62,32 @@ def update_add_plate_info():
         plate = models.db.session.execute(models.db.select(models.Plates).filter_by(id=plate_id)).scalar_one()
         if not plate: 
             return jsonify({"error": "Plate not found"}), 404
-        if plate.type == "96":
-            plate96 = models.db.session.execute(models.db.select(models.Plate96).filter_by(plate_id=plate_id)).first()
+        if plate.type == 96:
+            # Prepare the statement to select the Plate96 object
+            stmt = select(models.Plate96).where(models.Plate96.plate_id == plate_id)
+            # Execute the statement and fetch the first result
+            plate96 = models.db.session.scalars(stmt).first()
+            # Check if the object exists and update
             if plate96:
                 plate96.wells = data['wells']
-            else:
-                return jsonify({"error": "Plate96 details not found"}), 404
-        elif plate.type == "384":
-            plate384 = models.db.session.execute(models.db.select(models.Plate384).filter_by(plate_id=plate_id)).first()
-            if plate384:
-                plate384.wells = data['wells']
-            else: 
-                return jsonify({"error":"Plate384 details not found"}), 404
+        elif plate.type == 384:
+            # Prepare the statement to select the Plate96 object
+            stmt = select(models.Plate96).where(models.Plate96.plate_id == plate_id)
+            # Execute the statement and fetch the first result
+            plate394 = models.db.session.scalars(stmt).first()
+            # Check if the object exists and update
+            if plate394:
+                plate394.wells = data['wells']
     
     # Logic for adding a new assay plate
     else: 
         new_plate = models.Plates(type=data['type'])
         models.db.session.add(new_plate)
         models.db.session.flush()
-        if data['type'] == "96": 
+        if data['type'] == 96: 
             new_plate96 = models.Plate96(plate_id=new_plate.id, wells=data['wells'])
             models.db.session.add(new_plate96)
-        elif data['type'] == "384": 
+        elif data['type'] == 384: 
             new_plate384 = models.Plate384(plate_id=new_plate.id, wells=data['wells'])
             models.db.session.add(new_plate384)
 
