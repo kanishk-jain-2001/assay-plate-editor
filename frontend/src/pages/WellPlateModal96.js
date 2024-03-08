@@ -21,6 +21,10 @@ export default function WellPlateModal96(props) {
       setShowWellDataModal(false);
     };
 
+    const handleWellDataClear = () => {
+      setWellsData(Array(96).fill(null))
+    };
+
     const renderWells = () => {
       let wells = [];
       for (let i = 0; i < 8; i++) {
@@ -58,9 +62,9 @@ export default function WellPlateModal96(props) {
             </div>
           </Modal.Body>
           <Modal.Footer className="d-flex justify-content-between">
-              <Button variant="danger">Clear</Button>
+              <Button variant="danger" onClick={handleWellDataClear}>Clear</Button>
               <div>
-                  <Button className="me-2" onClick={() => {
+                  <Button className= "me-2" onClick={() => {
                     props.onSave(wellsData); 
                     props.onHide();
                   }}>
