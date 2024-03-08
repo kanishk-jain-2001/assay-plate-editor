@@ -14,18 +14,23 @@ with app.app_context():
 
 @app.route("/view-assay-plates", methods=['GET'])
 def view_plates():
-    """ Returns a list of all configured plates in the database """
-    # Fetch data from database
+    # Fetch data from database with joined details
     plates_query = models.db.session.query(models.Plates).all()
 
     # Convert data into a serializable format
     plates_data = []
     for plate in plates_query:
         plate_dict = {column.name: getattr(plate, column.name) for column in plate.__table__.columns}
+        # Add wells information if available
+        if plate.type == 96:  # Assuming 'type' indicates the plate type
+            plate_dict['wells'] = plate.plate96_details.wells if plate.plate96_details else None
+        elif plate.type == 384:
+            plate_dict['wells'] = plate.plate384_details.wells if plate.plate384_details else None
         plates_data.append(plate_dict)
 
     # Return data as a JSON response
     return jsonify(plates_data)
+
 
 @app.route("/delete-assay-plate/<int:plate_id>", methods=['DELETE'])
 def delete_plate(plate_id):
