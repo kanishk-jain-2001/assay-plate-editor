@@ -9,8 +9,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] =  "postgresql://postgres:password@127.0.0
 
 models.db.init_app(app)
 
-with app.app_context():
-    models.db.create_all()
+# with app.app_context():
+#     models.db.create_all()
 
 @app.route("/view-assay-plates", methods=['GET'])
 def view_plates():
@@ -34,14 +34,21 @@ def view_plates():
 
 @app.route("/delete-assay-plate/<int:plate_id>", methods=['DELETE'])
 def delete_plate(plate_id):
-    """ Deletes a specific plate from the database """
-    plate_to_delete = models.db.session.execute(models.db.select(models.Plates).filter_by(id=plate_id)).scalar_one()
-    if plate_to_delete:
-        models.db.session.delete(plate_to_delete)
-        models.db.session.commit()
-        return jsonify({'message': 'User deleted successfully'}), 200
-    else:
-        return jsonify({'message': 'User not found'}), 404
+    """Deletes a specific plate from the database."""
+    try:
+        plate_to_delete = models.db.session.execute(models.db.select(models.Plates).filter_by(id=plate_id)).scalar_one()
+        if plate_to_delete:
+            models.db.session.delete(plate_to_delete)
+            models.db.session.commit()
+            return jsonify({'message': 'Plate deleted successfully'}), 200
+        else:
+            return jsonify({'message': 'Plate not found'}), 404
+    except Exception as e:
+        # Log the exception e
+        models.db.session.rollback()
+        print(f"Error: {e}")  # Log the exception for debugging
+        return jsonify({'message': 'An error occurred during deletion'}), 500
+
 
 @app.route("/update-or-add-assay-plate", methods=['POST'])
 def update_add_plate_info():

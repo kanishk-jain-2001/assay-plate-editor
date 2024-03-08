@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Well from '../components/Well';
@@ -10,10 +11,10 @@ export default function WellPlateModal96(props) {
     const [selectedWellIndex, setSelectedWellIndex] = useState(null);
 
     useEffect(() => {
-        if (props.initialwellsdata && props.initialwellsdata.length === 96) {
-            setWellsData(props.initialwellsdata);
+        if (props.plateinformation && props.plateinformation.wells) {
+            setWellsData(props.plateinformation.wells);
         }
-    }, [props.initialwellsdata]);
+    }, [props.plateinformation]);
 
     const handleWellClick = (index) => {
       setSelectedWellIndex(index);
@@ -30,6 +31,16 @@ export default function WellPlateModal96(props) {
     const handleWellDataClear = () => {
       setWellsData(Array(96).fill(null))
     };
+
+    const handleWellDataDelete = async (plateId) => {
+        try {
+          console.log(`http://127.0.0.1:5000/delete-assay-plate/${plateId}`)
+          const response = await axios.delete(`http://127.0.0.1:5000/delete-assay-plate/${plateId}`);
+          console.log('Response:', response.data);
+        } catch (error) {
+          console.error('Error:', error.response ? error.response.data : error.message);
+        }
+      }
 
     const renderWells = () => {
       let wells = [];
@@ -68,7 +79,7 @@ export default function WellPlateModal96(props) {
             </div>
           </Modal.Body>
           <Modal.Footer className="d-flex justify-content-between">
-              <Button variant="danger" onClick={handleWellDataClear}>Delete</Button>
+             <Button variant="danger" onClick={() => handleWellDataDelete(props.plateinformation.id)}>Delete</Button>
               <div>
                   <Button className= "me-2" onClick={() => {
                     props.onSave(wellsData); 
