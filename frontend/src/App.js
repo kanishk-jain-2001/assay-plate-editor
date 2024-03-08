@@ -16,7 +16,7 @@ export default function App () {
   const [modalShow384, setModalShow384] = useState(false);
   const [configuredPlates, setConfiguredPlates] = useState([]);
 
-   // Fetch data when component mounts
+  
    useEffect(() => {
     axios.get('http://127.0.0.1:5000/view-assay-plates')
       .then(response => {
@@ -25,12 +25,13 @@ export default function App () {
       .catch(error => {
         console.error('Error fetching data', error);
       });
-  }, []); // Empty dependency array to run once on mount
+  }, []); 
 
-  // Function to handle card click (you can modify this as needed)
-  const handleCardClick = (plateId) => {
-    console.log("Clicked plate:", plateId);
-    // Implement what should happen when a card is clicked
+
+  const handleCardClick = (plateId, plateType) => {
+    if (plateType === 96){
+      setModalShow96(true)
+    }
   };
 
   const handleSave96 = (data) => {
@@ -59,7 +60,7 @@ export default function App () {
           {configuredPlates.map(plate => (
             <Card 
               key={plate.id} 
-              onClick={() => handleCardClick(plate.id)} 
+              onClick={() => handleCardClick(plate.id, plate.type)} 
               style={{ width: '18rem', cursor: 'pointer', margin: '10px' }}
             >
               <Card.Body>

@@ -21,6 +21,10 @@ const WellDataModal = ({ show, onHide, onSave, initialData }) => {
     return data.reagent || data.antibody || data.concentration;
   };  
 
+  const resetData = () => {
+    setData({ reagent: '', antibody: '', concentration: '' });
+  };  
+
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
@@ -68,7 +72,7 @@ const WellDataModal = ({ show, onHide, onSave, initialData }) => {
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={() => isInputValid() && onSave(data)}>Save</Button>
-        <Button onClick={onHide}>Cancel</Button>
+        <Button onClick={() => { resetData(); onHide(); }}>Cancel</Button>
       </Modal.Footer>
     </Modal>
   );
