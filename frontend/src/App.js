@@ -86,8 +86,8 @@ export default function App () {
 
       <WellPlateModal96Edit
         show={modalShow96Edit}
-        information = {plate96Info}
         onHide={() => setModalShow96Edit(false)}
+        initialwellsdata={plate96Info.wells}
       />
 
       <WellPlateModal384
