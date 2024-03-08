@@ -30,7 +30,7 @@ export default function App () {
       .catch(error => {
         console.error('Error fetching data', error);
       });
-  }, []); 
+  }, [modalShow96, modalShow96Edit]); 
 
 
   const handleCardClick = (plate) => {
@@ -47,6 +47,7 @@ export default function App () {
     })
     .then(response => {
       console.log('Data successfully sent to the backend', response);
+      window.location.reload(); // Reload the page after a successful save
     })
     .catch(error => {
       console.error('Error sending data to the backend', error);

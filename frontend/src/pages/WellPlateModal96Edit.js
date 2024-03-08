@@ -36,6 +36,7 @@ export default function WellPlateModal96(props) {
         try {
           const response = await axios.delete(`http://127.0.0.1:5000/delete-assay-plate/${plateId}`);
           console.log('Response:', response.data);
+          window.location.reload(); // Reload the page after a successful save
         } catch (error) {
           console.error('Error:', error.response ? error.response.data : error.message);
         }
@@ -66,6 +67,7 @@ export default function WellPlateModal96(props) {
       })
       .then(response => {
         console.log('Data successfully sent to the backend', response);
+        window.location.reload(); // Reload the page after a successful save
       })
       .catch(error => {
         console.error('Error sending data to the backend', error);
@@ -92,7 +94,7 @@ export default function WellPlateModal96(props) {
             </div>
           </Modal.Body>
           <Modal.Footer className="d-flex justify-content-between">
-             <Button variant="danger" onClick={() => handleWellDataDelete(props.plateinformation.id)}>Delete</Button>
+             <Button variant="danger" onClick={() => {handleWellDataDelete(props.plateinformation.id); props.onHide()}}>Delete</Button>
               <div>
                   <Button className= "me-2" onClick={() => {
                     onSave(wellsData, props.plateinformation.id ); 
