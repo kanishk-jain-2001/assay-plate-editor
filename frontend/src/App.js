@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import WellPlateModal96 from './WellPlateModal96';
-import WellPlateModal384 from './WellPlateModal384';
+import WellPlateModal96 from './pages/WellPlateModal96';
+import WellPlateModal384 from './pages/WellPlateModal384';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'; 
 

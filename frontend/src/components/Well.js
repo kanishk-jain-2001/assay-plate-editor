@@ -1,7 +1,6 @@
 const Well = ({ onClick, wellData }) => {
     return (
       <div className="well" onClick={onClick}>
-        {/* Display well data */}
         {wellData && (
           <div>
             <div>Reagent: {wellData.reagent}</div>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import Well from './Well';
-import WellDataModal from './WellDataModal'; // Import the WellDataModal component
+import Well from '../components/Well';
+import WellDataModal from '../components/WellDataModal'; 
 
 export default function WellPlateModal96(props) {
     const [wellsData, setWellsData] = useState(Array(96).fill(null));
@@ -53,7 +53,7 @@ export default function WellPlateModal96(props) {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="plate" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)' }}>
+            <div className="plate">
               {renderWells()}
             </div>
           </Modal.Body>
@@ -67,8 +67,6 @@ export default function WellPlateModal96(props) {
             <Button onClick={props.onHide}>Close</Button>
           </Modal.Footer>
         </Modal>
-
-        {/* WellDataModal for editing well data */}
         <WellDataModal
           show={showWellDataModal}
           onHide={() => setShowWellDataModal(false)}
