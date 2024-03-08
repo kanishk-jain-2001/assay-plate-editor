@@ -78,7 +78,7 @@ export default function WellPlateModal96(props) {
           show={showWellDataModal}
           onHide={() => setShowWellDataModal(false)}
           onSave={handleWellDataSave}
-          wellData={selectedWellIndex !== null ? wellsData[selectedWellIndex] : null}
+          initialData={selectedWellIndex !== null ? wellsData[selectedWellIndex] : null}
         />
       </>
     );

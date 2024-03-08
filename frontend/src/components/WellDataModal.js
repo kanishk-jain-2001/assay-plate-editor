@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 const WellDataModal = ({ show, onHide, onSave, initialData }) => {
   const [data, setData] = useState(initialData || { reagent: null, antibody: null, concentration: null });
 
+  useEffect(() => {
+    if (initialData === null) {
+      setData({ reagent: '', antibody: '', concentration: '' });
+    } else {
+      setData(initialData || { reagent: null, antibody: null, concentration: null });
+    }
+  }, [initialData]);
+  
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
