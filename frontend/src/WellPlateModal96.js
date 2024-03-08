@@ -33,7 +33,12 @@ export default function WellPlateModal96(props) {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button>Save</Button>
+          <Button onClick={() => {
+            props.onSave(wellsData); // Optionally pass the wells data back to the parent component
+            props.onHide();
+          }}>
+            Save
+          </Button>
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>

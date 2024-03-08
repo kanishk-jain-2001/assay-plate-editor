@@ -13,3 +13,4 @@ const Well = ({ onClick, wellData }) => {
     );
   };
   
+export default Well;
