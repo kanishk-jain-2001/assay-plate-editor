@@ -3,6 +3,7 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import WellPlateModal96 from './pages/WellPlateModal96';
+import WellPlateModal96Edit from './pages/WellPlateModal96Edit';
 import WellPlateModal384 from './pages/WellPlateModal384';
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,7 +14,11 @@ import './App.css';
 export default function App () {
 
   const [modalShow96, setModalShow96] = useState(false);
+  const [modalShow96Edit, setModalShow96Edit] = useState(false);
+  const [plate96Info, setPlate96Info] = useState([]);
+
   const [modalShow384, setModalShow384] = useState(false);
+
   const [configuredPlates, setConfiguredPlates] = useState([]);
 
   
@@ -28,9 +33,10 @@ export default function App () {
   }, []); 
 
 
-  const handleCardClick = (plateId, plateType) => {
-    if (plateType === 96){
-      setModalShow96(true)
+  const handleCardClick = (plate) => {
+    if (plate.type === 96){
+      setPlate96Info(plate)
+      setModalShow96Edit(true)
     }
   };
 
@@ -55,12 +61,12 @@ export default function App () {
               <Button variant="info" className = "me-2" onClick={() => setModalShow96(true)}> Add a 96 Well Plate </Button>
               <Button variant="info" onClick={() => setModalShow384(true)}> Add a 384 Well Plate </Button>
           </div>
-          <h5 className="mt-3"> Configured Assay Plates: </h5>
+          <h5 className="mt-3"> Previously Configured Assay Plates: </h5>
           <div className="d-flex flex-wrap justify-content-center align-items-center mt-3">
           {configuredPlates.map(plate => (
             <Card 
               key={plate.id} 
-              onClick={() => handleCardClick(plate.id, plate.type)} 
+              onClick={() => handleCardClick(plate)} 
               style={{ width: '18rem', cursor: 'pointer', margin: '10px' }}
             >
               <Card.Body>
@@ -76,6 +82,12 @@ export default function App () {
         show={modalShow96}
         onHide={() => setModalShow96(false)}
         onSave={handleSave96}
+      />
+
+      <WellPlateModal96Edit
+        show={modalShow96Edit}
+        information = {plate96Info}
+        onHide={() => setModalShow96Edit(false)}
       />
 
       <WellPlateModal384
