@@ -16,32 +16,41 @@ const WellDataModal = ({ show, onHide, onSave, initialData }) => {
       </Modal.Header>
       <Modal.Body>
         <form>
-          <div>
-            <label>Reagent:</label>
-            <input
-              type="text"
-              name="reagent"
-              value={data.reagent}
-              onChange={handleChange}
-            />
+          <div className="row d-flex align-items-center">
+            <label className="col-sm-6">Reagent:</label>
+            <div className="col-sm-6">
+              <input
+                type="text"
+                className="form-control"
+                name="reagent"
+                value={data.reagent}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-          <div>
-            <label>Antibody:</label>
-            <input
-              type="text"
-              name="antibody"
-              value={data.antibody}
-              onChange={handleChange}
-            />
+          <div className="row d-flex align-items-center">
+            <label className="col-sm-6">Antibody:</label>
+            <div className="col-sm-6">
+              <input
+                type="text"
+                className="form-control"
+                name="antibody"
+                value={data.antibody}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-          <div>
-            <label>Concentration:</label>
-            <input
-              type="text"
-              name="concentration"
-              value={data.concentration}
-              onChange={handleChange}
-            />
+          <div className="row d-flex align-items-center">
+            <label className="col-sm-6">Concentration:</label>
+            <div className="col-sm-6">
+              <input
+                type="text"
+                className="form-control"
+                name="concentration"
+                value={data.concentration}
+                onChange={handleChange}
+              />
+            </div>
           </div>
         </form>
       </Modal.Body>

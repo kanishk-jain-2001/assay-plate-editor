@@ -15,9 +15,7 @@
   background-color: #f8f8f8; /* Light background color */
 }
 
-/* Additional styling for displaying well data */
-.well > div {
-  text-align: center;
+.well-active {
+  background-color: green; 
 }
-
   
