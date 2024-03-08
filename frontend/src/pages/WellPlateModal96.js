@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Well from '../components/Well';
@@ -8,6 +8,10 @@ export default function WellPlateModal96(props) {
     const [wellsData, setWellsData] = useState(Array(96).fill(null));
     const [showWellDataModal, setShowWellDataModal] = useState(false);
     const [selectedWellIndex, setSelectedWellIndex] = useState(null);
+
+    useEffect(() => {
+      console.log('wellsData has been updated', wellsData);
+  }, [wellsData]);
 
     const handleWellClick = (index) => {
       setSelectedWellIndex(index);
