@@ -34,7 +34,7 @@ export default function WellPlateModal96(props) {
 
     const handleWellDataDelete = async (plateId) => {
         try {
-          const response = await axios.delete(`http://127.0.0.1:5000/delete-assay-plate/${plateId}`);
+          const response = await axios.delete(`https://assay-plate-editor.onrender.com/delete-assay-plate/${plateId}`);
           console.log('Response:', response.data);
           window.location.reload(); // Reload the page after a successful save
         } catch (error) {
@@ -61,7 +61,7 @@ export default function WellPlateModal96(props) {
 
     const onSave = async (wellData, plateID) => {
       console.log(wellData)
-      axios.post('http://127.0.0.1:5000/update-or-add-assay-plate', {
+      axios.post('https://assay-plate-editor.onrender.com/update-or-add-assay-plate', {
         id: plateID,
         wells: wellData
       })

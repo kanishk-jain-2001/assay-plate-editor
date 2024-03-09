@@ -23,7 +23,7 @@ export default function App () {
 
   
    useEffect(() => {
-    axios.get('http://127.0.0.1:5000/view-assay-plates')
+    axios.get('https://assay-plate-editor.onrender.com/view-assay-plates')
       .then(response => {
         setConfiguredPlates(response.data);
       })
@@ -41,7 +41,7 @@ export default function App () {
   };
 
   const handleSave96 = (data) => {
-    axios.post('http://127.0.0.1:5000/update-or-add-assay-plate', {
+    axios.post('https://assay-plate-editor.onrender.com/update-or-add-assay-plate', {
       type: 96,
       wells: data
     })
