@@ -6,12 +6,12 @@ import models
 app = Flask(__name__)
 CORS(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] =  "postgresql://postgres:password@127.0.0.1:5432/bio-assay-app"
+app.config["SQLALCHEMY_DATABASE_URI"] =  "postgresql://assay_editor_user:YR0BtSm3UdKWcmpeRoXdmhXxmZl5atdz@dpg-cnlqc621hbls7395067g-a.oregon-postgres.render.com/assay_editor"
 
 models.db.init_app(app)
 
-# with app.app_context():
-#     models.db.create_all()
+with app.app_context():
+    models.db.create_all()
 
 @app.route("/view-assay-plates", methods=['GET'])
 def view_plates():
