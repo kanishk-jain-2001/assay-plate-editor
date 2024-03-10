@@ -63,7 +63,7 @@ export default function App () {
               <Button variant="info" onClick={() => setModalShow384(true)}> Add a 384 Well Plate </Button>
           </div>
           <h5 className="mt-3"> Previously Configured Assay Plates: </h5>
-          <p> (This is currently hosted on a free backend service so you may need to save a plate and hit refresh a few times to 'kickstart' the service provider) </p>
+          <p> (This is currently hosted on a free backend service so it may take about a minute to kick start) </p>
           <div className="d-flex flex-wrap justify-content-center align-items-center mt-3">
           {configuredPlates.map(plate => (
             <Card 
